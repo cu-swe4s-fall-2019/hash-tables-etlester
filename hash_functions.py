@@ -19,6 +19,7 @@ def h_rolling(key, N):
 def main():
     key = 'act'
     size = 1000
+    print(type(key))
     output = h_rolling(key, size)
     print(output)
 
