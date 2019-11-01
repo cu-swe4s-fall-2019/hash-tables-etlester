@@ -1,6 +1,6 @@
-import hash_functions
 import random
 import numpy
+import hash_functions
 import time
 import matplotlib.pyplot as plt
 
