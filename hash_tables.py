@@ -1,6 +1,6 @@
 import random
 import numpy
-import hash_functions
+# import hash_functions
 import time
 import matplotlib.pyplot as plt
 
@@ -43,11 +43,13 @@ class ChainedHash:
         self.N = N
         self.T = [ [] for i in range(N) ]
         self.M = 0
+        self.K = []
 
     def add(self, key, value):
         hash_slot = self.hash_function(key, self.N)
         self.T[hash_slot].append((key,value))
         self.M += 1
+        self.K.append(key.strip('\n'))
         return True
 
     def search(self, key):
@@ -57,7 +59,20 @@ class ChainedHash:
                 return v
         return None
 
+def h_ascii(key, N):
+    s = 0
+    for i in range(len(key)):
+        s += ord(key[i])
+    return s%N
 
+def h_rolling(key, N):
+    p = 53
+    m=2**64
+    s = 0
+    for i in range(len(key)):
+        s += ord(key[i]) * p**i
+    s2 = s % m
+    return s % N
 
 def main():
     #load data
